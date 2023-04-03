@@ -1,0 +1,236 @@
+2023-04-03T09:51:27.517+0800	ERROR	core/tab.go:112	[margins must be positive
+
+Stack:
+goroutine 1 [running, locked to thread]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x7a
+github.com/lxn/walk.newErr({0x11c6826, 0x18})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/error.go:81 +0x2d
+github.com/lxn/walk.newError({0x11c6826, 0x18})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/error.go:85 +0x33
+github.com/lxn/walk.(*LayoutBase).SetMargins(0xc00026a990, {0x0, 0xfffffffffffffffb, 0x0, 0x0})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/layout.go:463 +0x135
+github.com/lxn/walk/declarative.setLayoutMargins({0x1264a40, 0xc00026a990}, {0x0, 0xfffffffffffffffb, 0x0, 0x0}, 0x0)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/layouts.go:62 +0x15a
+github.com/lxn/walk/declarative.HBox.Create({{0x0, 0xfffffffffffffffb, 0x0, 0x0}, 0x0, 0x0, 0x0, 0x0})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/layouts.go:84 +0xb9
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc000285340}, {0x126b700, 0xc00028d500}, 0xc000617f80)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:336 +0x150f
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125e000, 0xc000284dc0}, {0x126bc70, 0xc00028c380}, 0xc000619350)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.GroupBox.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/groupbox.go:79 +0x252
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc0002842c0}, {0x126b700, 0xc0000a8a80}, 0xc00061a780)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc000284000}, {0x126b700, 0xc0000a8700}, 0xc00061bb80)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc0000bdb80}, {0x126b700, 0xc0000a8380}, 0xc00061cf80)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+flexible/core.(*appTab).init(0xc00000a0e8)
+	D:/自己写的工具/flexible/core/tab.go:111 +0xfd8
+flexible/core.ExportTab()
+	D:/自己写的工具/flexible/core/tab.go:18 +0x4a
+flexible/core.(*App).Start(0xc0003f80f0)
+	D:/自己写的工具/flexible/core/app.go:185 +0x405
+main.main()
+	D:/自己写的工具/flexible/main.go:42 +0x277
+]
+2023-04-03T09:51:27.519+0800	ERROR	core/tab.go:20	[init tab err margins must be positive
+
+Stack:
+goroutine 1 [running, locked to thread]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x7a
+github.com/lxn/walk.newErr({0x11c6826, 0x18})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/error.go:81 +0x2d
+github.com/lxn/walk.newError({0x11c6826, 0x18})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/error.go:85 +0x33
+github.com/lxn/walk.(*LayoutBase).SetMargins(0xc00026a990, {0x0, 0xfffffffffffffffb, 0x0, 0x0})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/layout.go:463 +0x135
+github.com/lxn/walk/declarative.setLayoutMargins({0x1264a40, 0xc00026a990}, {0x0, 0xfffffffffffffffb, 0x0, 0x0}, 0x0)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/layouts.go:62 +0x15a
+github.com/lxn/walk/declarative.HBox.Create({{0x0, 0xfffffffffffffffb, 0x0, 0x0}, 0x0, 0x0, 0x0, 0x0})
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/layouts.go:84 +0xb9
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc000285340}, {0x126b700, 0xc00028d500}, 0xc000617f80)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:336 +0x150f
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125e000, 0xc000284dc0}, {0x126bc70, 0xc00028c380}, 0xc000619350)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.GroupBox.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/groupbox.go:79 +0x252
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc0002842c0}, {0x126b700, 0xc0000a8a80}, 0xc00061a780)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc000284000}, {0x126b700, 0xc0000a8700}, 0xc00061bb80)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+github.com/lxn/walk/declarative.(*Builder).InitWidget(0xc0000a60b0, {0x125dfc0, 0xc0000bdb80}, {0x126b700, 0xc0000a8380}, 0xc00061cf80)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/builder.go:383 +0x243b
+github.com/lxn/walk/declarative.Composite.Create({{{0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, {0x0, 0x0}, ...}, ...}, ...)
+	C:/Users/geff/go/pkg/mod/github.com/lxn/walk@v0.0.0-20210112085537-c389da54e794/declarative/composite.go:84 +0x2bb
+flexible/core.(*appTab).init(0xc00000a0e8)
+	D:/自己写的工具/flexible/core/tab.go:111 +0xfd8
+flexible/core.ExportTab()
+	D:/自己写的工具/flexible/core/tab.go:18 +0x4a
+flexible/core.(*App).Start(0xc0003f80f0)
+	D:/自己写的工具/flexible/core/app.go:185 +0x405
+main.main()
+	D:/自己写的工具/flexible/main.go:42 +0x277
+]
+2023-04-03T16:36:09.813+0800	ERROR	flexible/main.go:25	[[panic] err: assignment to entry in nil map
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0x194e380, 0x1ae44d0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).SetTabChangeFn(0xc0004bcee0, 0xc000273a00)
+	D:/自己写的工具/flexible/core/app.go:356 +0x66
+flexible/module/bili.(*bilibiliTab).InitTab(0x1880fc0)
+	D:/自己写的工具/flexible/module/bili/tab.go:235 +0xc16
+flexible/module/bili.ExportTab()
+	D:/自己写的工具/flexible/module/bili/tab.go:38 +0x7d
+main.main()
+	D:/自己写的工具/flexible/main.go:48 +0x37f
+
+]
+2023-04-03T21:38:16.245+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0x1acf220, 0x19f8ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).GetWindowS(0xc0001679d0)
+	D:/自己写的工具/flexible/core/app.go:355 +0x2f
+flexible/module/bili.ExportTab()
+	D:/自己写的工具/flexible/module/bili/tab.go:37 +0x3b
+main.main()
+	D:/自己写的工具/flexible/main.go:42 +0x26f
+
+]
+2023-04-03T21:55:41.270+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0x171f260, 0x1648ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).GetWindowS(0x0)
+	D:/自己写的工具/flexible/core/app.go:362 +0x20
+flexible/module/bili.ExportTab()
+	D:/自己写的工具/flexible/module/bili/tab.go:37 +0x3b
+flexible/module/bili.ExportModule()
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x26
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x1df
+
+]
+2023-04-03T22:00:02.352+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0x1b9f200, 0x1ac8ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).GetWindowS(0x0)
+	D:/自己写的工具/flexible/core/app.go:363 +0x20
+flexible/module/bili.ExportTab()
+	D:/自己写的工具/flexible/module/bili/tab.go:37 +0x3b
+flexible/module/bili.ExportModule()
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x26
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x1df
+
+]
+2023-04-03T22:04:28.041+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0xe6f200, 0xd98ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).GetWindowS(0x0)
+	D:/自己写的工具/flexible/core/app.go:363 +0x20
+flexible/module/bili.ExportTab()
+	D:/自己写的工具/flexible/module/bili/tab.go:37 +0x3b
+flexible/module/bili.ExportModule()
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x26
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x1ec
+
+]
+2023-04-03T22:08:10.374+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0xf5f200, 0xe88ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).GetWindowS(0x0)
+	D:/自己写的工具/flexible/core/app.go:363 +0x20
+flexible/module/bili.ExportTab()
+	D:/自己写的工具/flexible/module/bili/tab.go:37 +0x3b
+flexible/module/bili.ExportModule()
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x26
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x1ec
+
+]
+2023-04-03T22:13:43.225+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0xf2f220, 0xe58ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).SetTabChangeFn(0x0, 0xc00058e980)
+	D:/自己写的工具/flexible/core/app.go:371 +0x22
+flexible/module/bili.(*bilibiliTab).InitTab(0xe61fc0)
+	D:/自己写的工具/flexible/module/bili/tab.go:235 +0xc16
+flexible/module/bili.ExportTab(0xc000100800)
+	D:/自己写的工具/flexible/module/bili/tab.go:38 +0x7a
+flexible/module/bili.ExportModule(0xc000100800)
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x30
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x205
+
+]
+2023-04-03T22:17:14.562+0800	ERROR	flexible/main.go:25	[[panic] err: runtime error: invalid memory address or nil pointer dereference
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0x18af220, 0x17d8ee0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/core.(*Module).SetTabChangeFn(0x0, 0xc0005b58b0)
+	D:/自己写的工具/flexible/core/app.go:371 +0x22
+flexible/module/bili.(*bilibiliTab).InitTab(0x17e1fc0)
+	D:/自己写的工具/flexible/module/bili/tab.go:235 +0xc16
+flexible/module/bili.ExportTab(0xc0005a0400)
+	D:/自己写的工具/flexible/module/bili/tab.go:38 +0x7a
+flexible/module/bili.ExportModule(0xc0005a0400)
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x30
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x205
+
+]
