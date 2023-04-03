@@ -38,10 +38,6 @@ type App struct {
 	win  *MyMainWindow
 }
 
-//var MMW = Flexwiondow()
-
-//var tabs []*walk.TabPage
-
 func NewApp(name, version string, ioc []byte) (*App, error) {
 
 	app := App{
@@ -54,6 +50,8 @@ func NewApp(name, version string, ioc []byte) (*App, error) {
 		win:     new(MyMainWindow),
 		//win:     Flexwiondow(),
 	}
+	app.win.TabChangeFn = make(map[string]func())
+
 	if Exists(app.config.configName) {
 		err := app.config.load()
 		if err != nil {
@@ -105,8 +103,6 @@ func (a *App) onReady() {
 		for {
 			select {
 			case <-setItem.ClickedCh:
-				//MMW.Show()
-				//a.win.SetSize(walk.Size{600, 500})
 				a.win.Show()
 				//cmd := exec.Command("cmd", "/c", "start", a.config.configName)
 				//cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
@@ -189,6 +185,8 @@ func (a *App) Start() error {
 			a.RegisterTab(m.tab)
 		}
 	}
+	//gui run
+	a.WinStart()
 	return nil
 }
 func (a *App) Win() *MyMainWindow {
@@ -243,6 +241,7 @@ func (a *App) doTitle2() {
 	}
 }
 func (a *App) RegisterModule(module ...*Module) {
+	a.Initwiondow()
 	for i := range module {
 		m := module[i]
 		mc, has := a.config.Module[m.name]

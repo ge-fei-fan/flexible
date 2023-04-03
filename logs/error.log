@@ -234,3 +234,39 @@ main.main()
 	D:/自己写的工具/flexible/main.go:38 +0x205
 
 ]
+2023-04-03T22:44:40.886+0800	ERROR	flexible/main.go:25	[[panic] err: assignment to entry in nil map
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0x124f380, 0x13e55d0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/module/bili.(*bilibiliTab).InitTab(0x1182040)
+	D:/自己写的工具/flexible/module/bili/tab.go:151 +0xc17
+flexible/module/bili.ExportTab(0xc000074000)
+	D:/自己写的工具/flexible/module/bili/tab.go:39 +0x7a
+flexible/module/bili.ExportModule(0xc000074000)
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x30
+main.main()
+	D:/自己写的工具/flexible/main.go:37 +0x1f4
+
+]
+2023-04-03T22:45:38.964+0800	ERROR	flexible/main.go:25	[[panic] err: assignment to entry in nil map
+stack: goroutine 1 [running, locked to thread]:
+main.getCurrentGoroutineStack()
+	D:/自己写的工具/flexible/main.go:18 +0x6b
+main.main.func1()
+	D:/自己写的工具/flexible/main.go:25 +0xcf
+panic({0xe6f380, 0x10055d0})
+	C:/Program Files/Go/src/runtime/panic.go:890 +0x267
+flexible/module/bili.(*bilibiliTab).InitTab(0xda2040)
+	D:/自己写的工具/flexible/module/bili/tab.go:151 +0xc17
+flexible/module/bili.ExportTab(0xc00051e080)
+	D:/自己写的工具/flexible/module/bili/tab.go:39 +0x7a
+flexible/module/bili.ExportModule(0xc00051e080)
+	D:/自己写的工具/flexible/module/bili/bili.go:59 +0x30
+main.main()
+	D:/自己写的工具/flexible/main.go:38 +0x1f4
+
+]

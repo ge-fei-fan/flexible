@@ -33,7 +33,6 @@ func main() {
 		log.Err(err)
 		return
 	}
-	a.Flexwiondow()
 	a.RegisterModule(
 		bili.ExportModule(a.Win()),
 		clipboard.ExportModule(),
@@ -43,9 +42,6 @@ func main() {
 		log.Err(err)
 		return
 	}
-	//a.RegisterTab(
-	//	bili.ExportTab(),
-	//)
-	a.WinStart()
+	//a.WinStart()
 
 }

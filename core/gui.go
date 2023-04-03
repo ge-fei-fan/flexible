@@ -15,9 +15,9 @@ type MyMainWindow struct {
 	TabChangeFn map[string]func()
 }
 
-func (a *App) Flexwiondow() {
+func (a *App) Initwiondow() {
 	//mmw := new(MyMainWindow)
-	a.win.TabChangeFn = make(map[string]func())
+	//a.win.TabChangeFn = make(map[string]func())
 	//mmw.app = a
 	icon, err := walk.Resources.Icon("ico.ico")
 	if err != nil {
