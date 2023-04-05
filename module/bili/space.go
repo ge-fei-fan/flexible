@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-var getViedoInterval = 300 * time.Second
+//var getViedoInterval = 300 * time.Second
 
 type Video struct {
 	Aid          int    `json:"aid"`            // 稿件avid
@@ -189,15 +189,17 @@ func NewUserHub() *UserHub {
 	return &UserHub{
 		configName: "bili.json",
 		Users:      make(map[string]*User),
-		done:       make(chan struct{}),
+		//done:       make(chan struct{}),
 	}
 }
 func (uh *UserHub) Start() {
-	log.Info("进入bili最新视频监控")
-	videoTicker := time.NewTicker(getViedoInterval)
+	log.Debug("进入bili最新视频监控")
+	uh.done = make(chan struct{})
+	videoTicker := time.NewTicker(time.Duration(conf.ViedoInterval) * time.Second)
+	log.Debug("监控时间间隔为:", time.Duration(conf.ViedoInterval)*time.Second)
 	defer func() {
 		videoTicker.Stop()
-		log.Info("退出bili监控")
+		log.Debug("退出bili监控")
 	}()
 	for {
 		select {

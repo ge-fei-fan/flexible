@@ -4,42 +4,40 @@ import (
 	log "github.com/ge-fei-fan/gefflog"
 	"github.com/lxn/walk"
 	. "github.com/lxn/walk/declarative"
+	"os"
+	"os/exec"
+	"syscall"
 )
 
 //基础设置的tab
 
-type appTab struct {
-	*walk.Composite
-}
+//type appTab struct {
+//	*walk.Composite
+//}
+//
+//var baseTab = new(appTab)
+//
+//func ExportTab() *walk.TabPage {
+//	tp, err := baseTab.init()
+//	if err != nil {
+//		log.Err("init tab err", err)
+//		return nil
+//	}
+//	return tp
+//}
 
-var baseTab = new(appTab)
-
-func ExportTab() *walk.TabPage {
-	tp, err := baseTab.init()
+func (a *App) initTab() error {
+	//fmt.Println(a.localIp)
+	tp, err := walk.NewTabPage()
 	if err != nil {
-		log.Err("init tab err", err)
-		return nil
+		return err
 	}
-	return tp
-}
-
-func (at *appTab) init() (tp *walk.TabPage, err error) {
-
-	tp, err = walk.NewTabPage()
-	if err != nil {
-		return nil, err
-	}
-
 	err = tp.SetTitle(" 基本配置 ")
 	tp.SetLayout(walk.NewHBoxLayout())
 	if err != nil {
-		return nil, err
+		return err
 	}
 	if err = (Composite{
-		AssignTo: &at.Composite,
-		//Layout: Flow{
-		//	Alignment: AlignHCenterVCenter,
-		//},
 		Layout: VBox{
 			Margins: Margins{Bottom: 1},
 		},
@@ -53,7 +51,7 @@ func (at *appTab) init() (tp *walk.TabPage, err error) {
 					},
 					LineEdit{
 						MaxSize:  Size{Width: 180},
-						Text:     "192.192.192.192",
+						Text:     a.localIp,
 						ReadOnly: true,
 					},
 					Label{
@@ -62,7 +60,7 @@ func (at *appTab) init() (tp *walk.TabPage, err error) {
 					NumberEdit{
 						MinValue: float64(10000),
 						MaxValue: float64(65535),
-						Value:    float64(12111),
+						Value:    float64(a.config.HttpPort),
 					},
 				},
 			},
@@ -78,7 +76,7 @@ func (at *appTab) init() (tp *walk.TabPage, err error) {
 								Text: "路径:",
 							},
 							LineEdit{
-								Text: "111",
+								Text: a.config.configName,
 							},
 						},
 					},
@@ -88,9 +86,33 @@ func (at *appTab) init() (tp *walk.TabPage, err error) {
 							HSpacer{},
 							PushButton{
 								Text: "打开所在文件夹",
+								OnClicked: func() {
+									dir, err := os.Getwd()
+									if err != nil {
+										log.Err(err)
+										return
+									}
+									//fmt.Println(dir)
+									cmd := exec.Command("cmd", "/c", "explorer", dir)
+									cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+									_, _ = cmd.Output()
+									//fmt.Println(out)
+									//if err != nil {
+									//	fmt.Println(err)
+									//	log.Err("打开配置文件出错：", err)
+									//}
+								},
 							},
 							PushButton{
 								Text: "打开配置文件",
+								OnClicked: func() {
+									cmd := exec.Command("cmd", "/c", "start", a.config.configName)
+									cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+									_, err := cmd.Output()
+									if err != nil {
+										log.Err("打开配置文件出错：", err)
+									}
+								},
 							},
 						},
 					},
@@ -100,5 +122,6 @@ func (at *appTab) init() (tp *walk.TabPage, err error) {
 	}).Create(NewBuilder(tp)); err != nil {
 		log.Err(err)
 	}
-	return
+	a.tabs = append(a.tabs, tp)
+	return err
 }

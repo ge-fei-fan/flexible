@@ -47,10 +47,10 @@ func NewApp(name, version string, ioc []byte) (*App, error) {
 		name:    name,
 		version: version,
 		ico:     ioc,
-		win:     new(MyMainWindow),
+		//win:     new(MyMainWindow),
 		//win:     Flexwiondow(),
 	}
-	app.win.TabChangeFn = make(map[string]func())
+	//app.win.TabChangeFn = make(map[string]func())
 
 	if Exists(app.config.configName) {
 		err := app.config.load()
@@ -69,7 +69,12 @@ func NewApp(name, version string, ioc []byte) (*App, error) {
 		app.config.HttpPort = 19999
 	}
 	app.g.SetPort(int(app.config.HttpPort))
-
+	ip, err := GetOutBoundIP()
+	if err != nil {
+		log.Err("GetOutBoundIP err:", err)
+	}
+	app.localIp = ip
+	app.Initwiondow()
 	return &app, nil
 }
 
@@ -86,11 +91,11 @@ func (a *App) onReady() {
 			go module.onReady(item)
 		}
 	}
-	ip, err := a.GetOutBoundIP()
-	if err != nil {
-		log.Err("GetOutBoundIP err:", err)
-	}
-	a.localIp = ip
+	//ip, err := GetOutBoundIP()
+	//if err != nil {
+	//	log.Err("GetOutBoundIP err:", err)
+	//}
+	//a.localIp = ip
 	//粘贴版监听text
 	//todo 监听图片
 	go a.ext.Clipboard.Start(clipboard.FmtText)
@@ -130,7 +135,7 @@ func (a *App) onReady() {
 	go a.g.Run()
 
 }
-func (a *App) GetOutBoundIP() (ip string, err error) {
+func GetOutBoundIP() (ip string, err error) {
 	conn, err := net.Dial("udp", "8.8.8.8:53")
 	if err != nil {
 		return "未知", err
@@ -179,12 +184,18 @@ func (a *App) Start() error {
 	//初始化gui
 	//a.Flexwiondow()
 	//先注册基本配置tab
-	a.RegisterTab(ExportTab())
+	//a.RegisterTab(ExportTab())
+
+	err := a.initTab()
+	if err != nil {
+		log.Err(err)
+	}
 	for _, m := range a.module {
 		if m.tab != nil {
 			a.RegisterTab(m.tab)
 		}
 	}
+	time.Sleep(time.Second)
 	//gui run
 	a.WinStart()
 	return nil
@@ -241,7 +252,7 @@ func (a *App) doTitle2() {
 	}
 }
 func (a *App) RegisterModule(module ...*Module) {
-	a.Initwiondow()
+	//a.Initwiondow()
 	for i := range module {
 		m := module[i]
 		mc, has := a.config.Module[m.name]

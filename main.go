@@ -27,7 +27,8 @@ func main() {
 	}()
 	var a *core.App
 	var err error
-	//core.RegisterTab(bili.ExportTab())
+
+	log.ChangeLogger(log.DEBUG | log.INFO | log.ERROR)
 	a, err = core.NewApp("flexible", "v1.0.0", nil)
 	if err != nil {
 		log.Err(err)

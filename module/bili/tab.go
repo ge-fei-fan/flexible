@@ -52,6 +52,7 @@ type videoInfo struct {
 }
 
 func (bt *bilibiliTab) InitTab() (tp *walk.TabPage, err error) {
+	var intervalEdit *walk.NumberEdit
 
 	tp, err = walk.NewTabPage()
 	if err != nil {
@@ -69,10 +70,6 @@ func (bt *bilibiliTab) InitTab() (tp *walk.TabPage, err error) {
 	}
 	if err = (Composite{
 		AssignTo: &bt.Composite,
-		//Layout: Flow{
-		//	//Margins:   Margins{Top: 5},
-		//	Alignment: AlignHCenterVCenter,
-		//},
 		Layout: VBox{
 			Margins: Margins{Bottom: 1},
 		},
@@ -107,17 +104,32 @@ func (bt *bilibiliTab) InitTab() (tp *walk.TabPage, err error) {
 								TextOnLeftSide: true,
 								ToolTipText:    "选中后能够自动获取up主最新投稿",
 								Checked:        false, //注意：true 默认选中，false:默认未选
-								//OnClicked: func() {
-								//	//fmt.Println(bt.autoDownloadCheck.Checked())
-								//	biliTab.changeAutoD(bt.autoDownloadCheck.Checked())
-								//},
+								OnClicked: func() {
+									if bt.collectionCheck.Checked() {
+										conf.IsCollect = true
+										go conf.userHub.Start()
+									} else {
+										conf.IsCollect = false
+										close(conf.userHub.done)
+									}
+									bili.SaveConfig(conf)
+								},
 							},
 							HSpacer{MaxSize: Size{Width: 20}},
 							Label{
 								Text: "采集间隔: ",
 							},
 							NumberEdit{
-								Value: float64(10),
+								AssignTo: &intervalEdit,
+								Value:    float64(conf.ViedoInterval),
+								OnValueChanged: func() {
+									conf.ViedoInterval = int64(intervalEdit.Value())
+									//walk.MsgBox(bt.win.MainWindow, "提示", "重新开启采集功能才会生效", walk.MsgBoxIconInformation)
+								},
+							},
+							Label{
+								Text:        "※",
+								ToolTipText: "修改采集时间后，需要重新开启采集功能才会生效",
 							},
 							HSpacer{},
 						},

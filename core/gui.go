@@ -16,8 +16,8 @@ type MyMainWindow struct {
 }
 
 func (a *App) Initwiondow() {
-	//mmw := new(MyMainWindow)
-	//a.win.TabChangeFn = make(map[string]func())
+	a.win = new(MyMainWindow)
+	a.win.TabChangeFn = make(map[string]func())
 	//mmw.app = a
 	icon, err := walk.Resources.Icon("ico.ico")
 	if err != nil {

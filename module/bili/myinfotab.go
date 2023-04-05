@@ -4,6 +4,10 @@ import (
 	log "github.com/ge-fei-fan/gefflog"
 	"github.com/lxn/walk"
 	. "github.com/lxn/walk/declarative"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"syscall"
 )
 
 func (bt *bilibiliTab) InitMyInfoTab() (err error) {
@@ -93,7 +97,7 @@ func (bt *bilibiliTab) InitMyInfoTab() (err error) {
 								Text: "视频存储路径:",
 							},
 							LineEdit{
-								Text:     "",
+								Text:     videoPath(),
 								ReadOnly: true,
 							},
 						},
@@ -104,6 +108,16 @@ func (bt *bilibiliTab) InitMyInfoTab() (err error) {
 							HSpacer{},
 							PushButton{
 								Text: "打开文件夹",
+								OnClicked: func() {
+									cmd := exec.Command("cmd", "/c", "explorer", videoPath())
+									cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+									_, _ = cmd.Output()
+									//fmt.Println(out)
+									//if err != nil {
+									//	fmt.Println(err)
+									//	log.Err("打开视频目录出错：", err)
+									//}
+								},
 							},
 							PushButton{
 								Text:    "更改文件夹",
@@ -123,7 +137,13 @@ func (bt *bilibiliTab) InitMyInfoTab() (err error) {
 	}
 	return
 }
-
+func videoPath() string {
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Err(err)
+	}
+	return filepath.Join(dir, conf.Path)
+}
 func ExitLogin() {
 	//Sessdata置空
 	biliTab.userInfo.Sessdata = ""

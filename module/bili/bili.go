@@ -23,9 +23,13 @@ type biliConfig struct {
 	Sessdata     string `json:"sessdata"`
 	RefreshToken string `json:"refreshtoken"`
 	//自动检测下载
-	Auto       bool `json:"auto"`
-	userHub    *UserHub
-	commonChan chan handleResult
+	Auto    bool `json:"auto"`
+	userHub *UserHub
+	//采集视频
+	IsCollect bool `json:"isCollect"`
+	//采集视频间隔
+	ViedoInterval int64 `json:"viedoInterval"`
+	commonChan    chan handleResult
 }
 
 // 下载结束通知
@@ -49,12 +53,17 @@ func (f *finishNotify) handle() {
 }
 
 var conf = biliConfig{
-	Path:       "bilibili",
-	Auto:       false,
-	userHub:    NewUserHub(),
-	commonChan: make(chan handleResult, 20),
+	Path:          "bilibili",
+	Auto:          false,
+	userHub:       NewUserHub(),
+	IsCollect:     false,
+	ViedoInterval: 300,
+	commonChan:    make(chan handleResult, 20),
 }
 
+func saveConf(conf interface{}) {
+	bili.SaveConfig(conf)
+}
 func ExportModule(win *core.MyMainWindow) *core.Module {
 	bili = core.NewModule("bilibili", "bilibili", "B站管理", onReady, onExit, router, ExportTab(win))
 	return bili
@@ -78,9 +87,20 @@ func onReady(item *systray.MenuItem) {
 		zenity.Error("获取粘贴板模块出错，无法使用自动下载功能")
 		conf.Auto = false
 	}
+	//是否自动下载
 	if conf.Auto {
 		biliTab.autoDownloadCheck.SetCheckState(walk.CheckChecked) //设置walk控件勾选
 		go startWatchD()
+	}
+
+	//是否采集
+	err = conf.userHub.load()
+	if err != nil {
+		log.Err("userHub load err:", err)
+	}
+	if conf.IsCollect {
+		biliTab.collectionCheck.SetCheckState(walk.CheckChecked)
+		go conf.userHub.Start()
 	}
 
 	autoUrlItem := item.AddSubMenuItemCheckbox("自动下载", "从粘贴板获取链接自动确认下载", conf.Auto)
@@ -103,12 +123,6 @@ func onReady(item *systray.MenuItem) {
 	}
 	go checkLogin(loginMenu)
 	go timeCheckLogin(loginMenu)
-	//监控最新视频
-	err = conf.userHub.load()
-	if err != nil {
-		log.Err("userHub load err:", err)
-	}
-	//go conf.userHub.Start()
 
 	for {
 		select {
@@ -146,7 +160,10 @@ func onReady(item *systray.MenuItem) {
 }
 func onExit() {
 	close(conf.commonChan)
-	close(conf.userHub.done)
+	if conf.userHub.done != nil && conf.IsCollect {
+		close(conf.userHub.done)
+	}
+
 }
 
 func router(group *ghttp.RouterGroup) {

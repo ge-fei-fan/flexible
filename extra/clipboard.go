@@ -41,9 +41,9 @@ func (a *Appclipboard) Start(t clipboard.Format) {
 	if t == clipboard.FmtImage {
 		format = MIMEImagePNG
 	}
-	log.Info(format, "开启粘贴板监控")
+	log.Debug(format, "开启粘贴板监控")
 	defer func() {
-		log.Info(format, "关闭粘贴板监控，线程退出...")
+		log.Debug(format, "关闭粘贴板监控，线程退出...")
 	}()
 	for text := range textCh {
 		if len(a.notifyChans) == 0 {
@@ -62,7 +62,7 @@ func (a *Appclipboard) Stop(t clipboard.Format) {
 	if has {
 		c()
 		delete(a.Cancel, t)
-		log.Info("取消粘贴板监控成功")
+		log.Debug("取消粘贴板监控成功")
 	}
 }
 
